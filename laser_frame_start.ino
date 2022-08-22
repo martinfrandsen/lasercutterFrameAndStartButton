@@ -19,67 +19,6 @@ void setup() {
 
 void DetectPress()
 {
-  long now = millis();
-  int frameState = digitalRead(buttonFrame);
-  int startState = digitalRead(buttonStart);
-  if (frameState == LOW) {
-    Serial.println(frameState);
-    delay(150);
-  }
-  if (frameState == LOW && buttonFramePrevState == HIGH && lastRun < now) {
-    Serial.println("Frame!");
-    Serial.println(lastRun);
-    Serial.println(now);
-    UpdateLastRun();
-    Keyboard.press(KEY_LEFT_ALT);
-    Keyboard.press('r');
-    Keyboard.releaseAll();
-    buttonFramePrevState = LOW;
-    delay(150);
-  } else {
-    buttonFramePrevState = HIGH;
-  }
-  if (startState == LOW && buttonStartPrevState == HIGH && lastRun < now) {
-    Serial.println("Start!");
-    UpdateLastRun();
-    Keyboard.press(KEY_LEFT_ALT);
-    Keyboard.press('s');
-    Keyboard.releaseAll();
-    buttonStartPrevState = LOW;
-    delay(150);
-  } else {
-    buttonStartPrevState = HIGH;
-  }
-}
-
-void DetectPress2()
-{
-  int frameState = digitalRead(buttonFrame);
-  int startState = digitalRead(buttonStart);
-  if (frameState == LOW && buttonFramePrevState == HIGH) {
-    Serial.println("Frame!");
-    Keyboard.press(KEY_LEFT_ALT);
-    Keyboard.press('r');
-    Keyboard.releaseAll();
-    buttonFramePrevState = LOW;
-    delay(1000);
-  } else {
-    buttonFramePrevState = HIGH;
-  }
-  if (startState == LOW && buttonStartPrevState == HIGH) {
-    Serial.println("Start!");
-    Keyboard.press(KEY_LEFT_ALT);
-    Keyboard.press('s');
-    Keyboard.releaseAll();
-    buttonStartPrevState = LOW;
-    delay(1000);
-  } else {
-    buttonStartPrevState = HIGH;
-  }
-}
-
-void DetectPress3()
-{
   int frameState = digitalRead(buttonFrame);
   int startState = digitalRead(buttonStart);
   if (frameState == LOW) {
@@ -119,11 +58,8 @@ void PrintString(String text) {
 }
 
 void UpdateLastRun() {
-  //Serial.println("Lastrun: " + lastRun);
   lastRun = millis() + 1000;
 }
 void loop() {
-  //DetectPress();
-  //DetectPress2();
-  DetectPress3();
+  DetectPress();
 }
